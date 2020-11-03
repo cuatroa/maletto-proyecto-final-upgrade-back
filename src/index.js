@@ -18,7 +18,7 @@ server.use(express.json());
 
 server.use(apiRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(`Connected to http://localhost:${PORT}`);
 });
