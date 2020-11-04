@@ -1,13 +1,13 @@
-const express = require('express');
+const express = require("express");
 
-const studentsRouter = require('./students');
+const usersRouter = require("./user.routes");
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.status(200).send('Server alive!');
+router.get("/", (req, res) => {
+  res.status(200).send("Server alive!");
 });
 
-router.use('/students', studentsRouter);
+router.use("/user.routes", usersRouter);
 
 module.exports = router;
