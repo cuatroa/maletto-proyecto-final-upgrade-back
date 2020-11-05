@@ -4,12 +4,12 @@ const mongoose = require("mongoose");
 const reviewSchema = new mongoose.Schema(
   {
     value: { type: Number }, //Hallar la manera de las estrellas
-    dateNow: { type: Date },
-    argument: { type: String },
-    userId: { type: mongoose.Types.ObjectId, ref: "User" },
+    comment: { type: String },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    locationSpace:{ type: mongoose.Schema.Types.ObjectId, ref: "LocationSpace" },
   },
   {
-    timestamps: true, //marca del tiempo de ejecución -- Cristian :) --SOS
+    timestamps: true, //marca del tiempo de ejecución -- se comparte con front
   }
 );
 

@@ -6,8 +6,10 @@ const bookingSchema = new mongoose.Schema(
     arriveDate: { type: Date, required: true },
     departureDate: { type: Date, required: true },
     price: { type: Number },
-    userId: { type: mongoose.Types.ObjectId, ref: "User" },
-    guardianId: { type: mongoose.Types.ObjectId, ref: "User" },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    guardian: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    //Aquí no se genera array --solo afecta a un user
+    locationSpace:{ type: mongoose.Schema.Types.ObjectId, ref: "LocationSpace" },
   },
   {
     timestamps: true, //marca del tiempo de ejecución -- Cristian :) --SOS
