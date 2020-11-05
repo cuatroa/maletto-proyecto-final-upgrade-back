@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 // Creamos un esquema para proteger la información que guardamos
 const reviewSchema = new mongoose.Schema(
   {
-    value: { type: Number, required: true }, //Hallar la manera de las estrellas
-    dateNow: { type: Date, required: true },
-    argument: { type: String, required: true },
+    value: { type: Number }, //Hallar la manera de las estrellas
+    dateNow: { type: Date },
+    argument: { type: String },
     userId: { type: mongoose.Types.ObjectId, ref: "User" },
   },
   {
