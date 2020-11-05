@@ -1,15 +1,15 @@
 const express = require("express");
-const User = require("../models/User");
+const LocationSpace = require("../models/LocationSpace");
 
 const router = express.Router(); //Se crean los caminos de rutas
 
 //hace alusión al userController -- Trae todos los Users --
 //req (lo que le usuario manda), res(objeto que tiene funciones y responde al enpoint-router), next(la function se comporta como un middleware-encadenando las rutas)
 router.get('/', (req, res, next) => {
-  User.find()
-    .then((users) => {
+  LocationSpace.find()
+    .then((locations) => {
         //sale respuesta ok
-        res.status(200).json(users);
+        res.status(200).json(locations);
     })
     .catch((error) => {
         //sale respuesta kao
@@ -23,9 +23,9 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res) => {
     const id = req.params.id;
   
-    User.findById(id)
-      .then((user) => {
-        res.status(200).json(user);
+    LocationSpace.findById(id)
+      .then((location) => {
+        res.status(200).json(location);
       })
       .catch((error) => {
         res.status(500).json(error.message);
@@ -33,21 +33,22 @@ router.get('/:id', (req, res) => {
   });
 
 router.post('/', (req, res) => {
-    const userInstance = new User({
-        name: req.body.name,
-        lastName: req.body.lastName,
-        address: req.body.address,
-        email: req.body.email,
-        birthDate: req.body.birthDate,
-        password: req.body.password,
-        guardian: req.body.guardian, // o falso!
-        telephone: req.body.telephone
+    const locationInstance = new LocationSpace({
+        location: req.body.location,
+        coordinates: req.body.coordinates,
+        // img
+        title: req.body.title,
+        availability: req.body.availability,
+        capacity: req.body.capacity,
+        description: req.body.description,
+        type: req.body.type
+        // TRAER USER Y REVIEW de otros modelos
     });
 
-    userInstance
+    locationInstance
     .save()
     .then(() => {
-      res.status(201).send(userInstance);
+      res.status(201).send(locationInstance);
     })
     .catch((err) => {
       res.status(422).json(err.message);
@@ -58,14 +59,15 @@ router.put('/:id', (req, res) => {
     const id = req.params.id; // 5f994b254025b0facece4fb4
   
     const changes = {
-        name: req.body.name,
-        lastName: req.body.lastName,
-        address: req.body.address,
-        email: req.body.email,
-        birthDate: req.body.birthDate,
-        password: req.body.password,
-        guardian: req.body.guardian, // o falso!
-        telephone: req.body.telephone
+        location: req.body.location,
+        coordinates: req.body.coordinates,
+        // img
+        title: req.body.title,
+        availability: req.body.availability,
+        capacity: req.body.capacity,
+        description: req.body.description,
+        type: req.body.type
+        // TRAER USER Y REVIEW de otros modelos
     };
   
     // Tenemos que limpiar los campos NO VÁLIDOS para poderlo guardar
@@ -79,9 +81,9 @@ router.put('/:id', (req, res) => {
       }
     });
 
-    User.findByIdAndUpdate(id, validChanges, { new: true })
-    .then((updatedUser) => {
-      res.status(200).json(updatedUser);
+    LocationSpace.findByIdAndUpdate(id, validChanges, { new: true })
+    .then((updatedLocation) => {
+      res.status(200).json(updatedLocation);
     })
     .catch((err) => {
       res.status(422).json(err.message);
@@ -91,9 +93,9 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
   
-    User.findByIdAndDelete(id)
+    LocationSpace.findByIdAndDelete(id)
       .then(() => {
-        res.status(200).send('User deleted!');
+        res.status(200).send('Location deleted!');
       })
       .catch(() => {
         res.status(500).json(err.message);

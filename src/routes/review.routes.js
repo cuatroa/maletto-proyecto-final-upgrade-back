@@ -1,13 +1,13 @@
 const express = require("express");
-const Booking = require("../models/Booking");
+const Review = require("../models/Review");
 
-const router = express.Router(); //Se crean los caminos de rutas
+const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    Booking.find()
-      .then((bookings) => {
+    Review.find()
+      .then((reviews) => {
           //sale respuesta ok
-          res.status(200).json(bookings);
+          res.status(200).json(reviews);
       })
       .catch((error) => {
           //sale respuesta kao
@@ -21,9 +21,9 @@ router.get('/', (req, res, next) => {
   router.get('/:id', (req, res) => {
       const id = req.params.id;
     
-      Booking.findById(id)
-        .then((booking) => {
-          res.status(200).json(booking);
+      Review.findById(id)
+        .then((review) => {
+          res.status(200).json(review);
         })
         .catch((error) => {
           res.status(500).json(error.message);
@@ -31,17 +31,17 @@ router.get('/', (req, res, next) => {
     });
   
   router.post('/', (req, res) => {
-      const bookingInstance = new Booking({
-          arriveDate: req.body.arriveDate,
-          departureDate: req.body.departureDate,
-          price: req.body.price,
+      const reviewInstance = new Review({
+          value: req.body.value,
+          comment: req.body.comment,
           //TRAER USER Y LOCATION
+
       });
   
-      bookingInstance
+      reviewInstance
       .save()
       .then(() => {
-        res.status(201).send(bookingInstance);
+        res.status(201).send(reviewInstance);
       })
       .catch((err) => {
         res.status(422).json(err.message);
@@ -52,10 +52,8 @@ router.get('/', (req, res, next) => {
       const id = req.params.id; // 5f994b254025b0facece4fb4
     
       const changes = {
-        arriveDate: req.body.arriveDate,
-        departureDate: req.body.departureDate,
-        price: req.body.price,
-        //TRAER USER Y LOCATION
+            value: req.body.value,
+            comment: req.body.comment,
       };
     
       // Tenemos que limpiar los campos NO VÁLIDOS para poderlo guardar
@@ -69,9 +67,9 @@ router.get('/', (req, res, next) => {
         }
       });
   
-      Booking.findByIdAndUpdate(id, validChanges, { new: true })
-      .then((updatedBooking) => {
-        res.status(200).json(updatedBooking);
+      Review.findByIdAndUpdate(id, validChanges, { new: true })
+      .then((updatedReview) => {
+        res.status(200).json(updatedReview);
       })
       .catch((err) => {
         res.status(422).json(err.message);
@@ -81,9 +79,9 @@ router.get('/', (req, res, next) => {
   router.delete('/:id', (req, res) => {
       const id = req.params.id;
     
-      Booking.findByIdAndDelete(id)
+      Review.findByIdAndDelete(id)
         .then(() => {
-          res.status(200).send('Booking deleted!');
+          res.status(200).send('Review deleted!');
         })
         .catch(() => {
           res.status(500).json(err.message);
@@ -91,5 +89,3 @@ router.get('/', (req, res, next) => {
     });
     
   module.exports = router;
-
-
