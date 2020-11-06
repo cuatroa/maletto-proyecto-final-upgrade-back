@@ -1,10 +1,7 @@
 const express = require("express");
 const User = require("../models/User");
-<<<<<<< HEAD
 const fileMiddleware = require("../middleware/file.middleware");
-=======
-const passport = require('passport');
->>>>>>> develop
+const passport = require("passport");
 
 const router = express.Router(); //Se crean los caminos de rutas
 
@@ -17,7 +14,7 @@ router.get("/", (req, res, next) => {
       res.status(200).json(users);
     })
     .catch((error) => {
-      //sale respuesta kao
+      //sale respuesta kaogit
       res.status(500).json(error.message);
     });
 });
