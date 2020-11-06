@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "seeds:students": "node src/seeds/students.js"
+    "seeds:students": "node src/seeds/students.js",
+    "seeds:users": "node src/seeds/users.js",
+    "seeds:locations": "node src/seeds/locationSpaces.js",
+    "seeds:reviews": "node src/seeds/reviews.js"
+
   },
   "keywords": [],
   "author": "Clar",

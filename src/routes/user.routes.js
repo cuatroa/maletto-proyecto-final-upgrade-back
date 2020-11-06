@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../models/User");
+const passport = require('passport');
 
 const router = express.Router(); //Se crean los caminos de rutas
 
