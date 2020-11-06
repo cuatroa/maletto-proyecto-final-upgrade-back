@@ -1,8 +1,8 @@
 //se ha de instalar el npm install --save multer => Esto nos va a ayudar a subir fotos al servidor
-const multer = require("multer");
+const multer = require('multer');
 
 //Se llama al modulo nativo de node -- path
-const path = require("path");
+const path = require('path');
 
 //Estructura para guardar las img--- se invoca al multer para exportar las img -- indicando como se va ha guardar (storage) & filtro para imagenes a aceptar (fileFilter)
 /**
@@ -10,7 +10,7 @@ const path = require("path");
  * 2º line = invocamos a la función "filename" -- Que dará el nombre a nuestra img
  * 3º line = se genera una ruta para almacenar los archivos
  */
-const uploadImgUser = multer.diskStorage({
+const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     /**
      *  cb = es la función que se utiliza para la devolución de llamada del midleware para la img que acepta 2 parámetros
@@ -22,32 +22,26 @@ const uploadImgUser = multer.diskStorage({
     /**
      * path.join(_dirname) => dónde estamos ejecutando la petición - dirname () --- y se añade dónde se almacenaran las imagenes que se subirán
      */
-    cb(null, path.join(__dirname, "../../public/uploads"));
-  },
+    cb(null, path.join(__dirname, '../public/uploads'));
+  }
 });
 
 /**
  * Creamos un filtro para que los usuarios solo puedan subir imágenes al servidor y no de archivos de texto o canciones.
  * Se genera una lista de archivos permitidos e invocaremos al callback
  */
-const VALID_FILE_TYPES = ["image/png", "image/jpg", "image/jpeg"];
+const VALID_FILE_TYPES = ['image/png', 'image/jpg', 'image/jpeg'];
 
-//Se almacena en esta constante una función flecha --- que sería igual que sustituyendo el const por function y realizar una función sin callback
 const fileFilter = (req, file, cb) => {
-  /**
-   * Se genera una función que estipula que si la imagen que me suben ha de coincidir con los datos metidos en la array (VALID_FILE_TYPES)
-   * En caso que coincida o no, se alude al callback para que ejecute el sms de error o un boolean aceptando o no la subida de img
-   */
   if (!VALID_FILE_TYPES.includes(file.mimetype)) {
-    cb(new Error("Invalid file type"));
+    cb(new Error('Invalid file type'));
   } else {
     cb(null, true);
   }
-};
-
+}
 // //se invoca al multer para exportar las img -- indicando como se va ha guardar (storage) & filtro para imagenes a aceptar (fileFilter)
 const upload = multer({
-  uploadImgUser,
+  storage,
   fileFilter,
 });
 
