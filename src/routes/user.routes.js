@@ -24,6 +24,8 @@ router.get('/:id', (req, res) => {
     const id = req.params.id;
   
     User.findById(id)
+    .populate('locationSpaces') //PELIGRO POR DUPLICIDAD DE DATOS? Función de JS que haga un Push de un nuevo ID(Location) en un User?
+    .exec()
       .then((user) => {
         res.status(200).json(user);
       })

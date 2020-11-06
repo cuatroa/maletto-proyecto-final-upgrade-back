@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema(
     name: { type: String, required: true },
     lastName: { type: String, required: true },
     // nickname: { type: String, required: true, minlength: 1 , unique: true }
-    address: { type: String, required: true },
+    address: { type: String },
     email: { type: String, required: true, unique: true }, //Poner @ como requerido -- input type email--
     birthDate: { type: Date }, //generar un desplegable -- input date --
     password: { type: String, required: true }, //Token -- Video Dalio --
