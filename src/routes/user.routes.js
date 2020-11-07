@@ -1,13 +1,13 @@
 const express = require("express");
 const User = require("../models/User");
-const fileMiddleware = require("../middleware/file.middleware");
+const fileMiddleware = require("../middlewares/file.middleware");
 const passport = require("passport");
 
 const router = express.Router(); //Se crean los caminos de rutas
 
 //hace alusión al userController -- Trae todos los Users --
 //req (lo que le usuario manda), res(objeto que tiene funciones y responde al enpoint-router), next(la function se comporta como un middleware-encadenando las rutas)
-router.get("/", (req, res, next) => {
+router.get('/', (req, res, next) => {
   User.find()
     .then((users) => {
       //sale respuesta ok
@@ -22,7 +22,7 @@ router.get("/", (req, res, next) => {
 //getbyid - post - put - delete
 //seeds - llenar los datos
 
-router.get("/:id", (req, res) => {
+router.get('/:id', (req, res) => {
   const id = req.params.id;
 
   User.findById(id)
@@ -42,8 +42,10 @@ router.get("/:id", (req, res) => {
  * Se alude al avatar, por si deseamos generar un icono a cada usuario en caso de no ser requerida la img --
  * También se puede poner picture para que se guarde en la carpeta uploads
  * */
-router.post("/", fileMiddleware.upload.single('picture'), (req, res) => {
-  console.log(req.file);
+
+router.post('/', fileMiddleware.upload.single('picture'), (req, res) => {
+  
+  console.log(req.file)
   const userInstance = new User({
     name: req.body.name,
     lastName: req.body.lastName,
@@ -52,12 +54,13 @@ router.post("/", fileMiddleware.upload.single('picture'), (req, res) => {
     birthDate: req.body.birthDate,
     password: req.body.password,
     guardian: req.body.guardian, // o falso!
-    telephone: req.body.telephone,
+    telephone: req.body.telephone
+    // img: "/uploads/" + req.file.filename
   });
-  // if (req.file) {
-  //   userInstance.img = "/public" + req.file.filename;
-  // }
-
+  if (req.file) {
+    userInstance.img = "/uploads/" + req.file.filename
+  }
+  
   userInstance
     .save()
     .then(() => {
@@ -68,7 +71,7 @@ router.post("/", fileMiddleware.upload.single('picture'), (req, res) => {
     });
 });
 
-router.put("/:id", (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id; // 5f994b254025b0facece4fb4
 
   const changes = {
@@ -102,7 +105,7 @@ router.put("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id;
 
   User.findByIdAndDelete(id)
