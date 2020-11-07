@@ -29,7 +29,7 @@ const seedUsers = [
     }
 ]
 
-const DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/Maletto-2020';
+const DB_URL = process.env.MONGO_ATLAS_URL;
 mongoose
   .connect(DB_URL, {
     useNewUrlParser: true,

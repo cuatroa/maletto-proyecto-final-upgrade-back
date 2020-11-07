@@ -10,7 +10,6 @@
     "seeds:users": "node src/seeds/users.js",
     "seeds:locations": "node src/seeds/locationSpaces.js",
     "seeds:reviews": "node src/seeds/reviews.js"
-
   },
   "keywords": [],
   "author": "Clar",
@@ -18,6 +17,7 @@
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "cloudinary": "^1.23.0",
     "connect-mongo": "^3.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

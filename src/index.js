@@ -20,7 +20,7 @@ server.use(express.urlencoded({ extended: false }));
 //No hace falta instalar el body-parser
 server.use(express.json());
 server.use(passport.initialize());
-server.use(express.static("public"));
+server.use(express.static(__dirname + "/public"));
 
 server.use(apiRoutes); //Es de donde se redireccionan las rutas del proyect
 
