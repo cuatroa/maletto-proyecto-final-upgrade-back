@@ -42,13 +42,12 @@ router.get("/:id", (req, res) => {
  * Se alude al avatar, por si deseamos generar un icono a cada usuario en caso de no ser requerida la img --
  * También se puede poner picture para que se guarde en la carpeta uploads
  * */
-router.post("/", fileMiddleware.upload.single("picture"), (req, res) => {
+router.post("/", fileMiddleware.upload.single('picture'), (req, res) => {
   console.log(req.file);
   const userInstance = new User({
     name: req.body.name,
     lastName: req.body.lastName,
     address: req.body.address,
-    img: req.file.img,
     email: req.body.email,
     birthDate: req.body.birthDate,
     password: req.body.password,
