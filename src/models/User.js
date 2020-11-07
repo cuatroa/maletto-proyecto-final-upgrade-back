@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 // Creamos un esquema para proteger la información que guardamos
 const userSchema = new mongoose.Schema(
   {
-    img: { type: String, default:""}, //se añade por defecto un avatar-añadir url
+    img: { type: String }, //se añade por defecto un avatar-añadir url
     name: { type: String, required: true },
     lastName: { type: String, required: true },
     // nickname: { type: String, required: true, minlength: 1 , unique: true }
@@ -12,11 +12,13 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true }, //Poner @ como requerido -- input type email--
     birthDate: { type: Date }, //generar un desplegable -- input date --
     password: { type: String, required: true }, //Token -- Video Dalio --
-    guardian: { type: Boolean}, //Boolean es para si o no -- en caso de + options string con value(basic/admin..)
+    guardian: { type: Boolean }, //Boolean es para si o no -- en caso de + options string con value(basic/admin..)
     telephone: { type: Number },
     //Se crean arrays para almacenar varios Id de otros modelos -- hipervinculación models
-    locationSpaces: [{ type: mongoose.Schema.Types.ObjectId, ref: "LocationSpace" }],
-    bookings:[{ type: mongoose.Schema.Types.ObjectId, ref: "Booking" }], //SOS Cristian
+    locationSpaces: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "LocationSpace" },
+    ],
+    bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Booking" }], //SOS Cristian
   },
   {
     timestamps: true,

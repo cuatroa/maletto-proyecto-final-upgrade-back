@@ -6,7 +6,11 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "seeds:students": "node src/seeds/students.js"
+    "seeds:students": "node src/seeds/students.js",
+    "seeds:users": "node src/seeds/users.js",
+    "seeds:locations": "node src/seeds/locationSpaces.js",
+    "seeds:reviews": "node src/seeds/reviews.js"
+
   },
   "keywords": [],
   "author": "Clar",
@@ -21,6 +25,7 @@
     "express-session": "^1.17.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.11",
+    "multer": "^1.4.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
   },

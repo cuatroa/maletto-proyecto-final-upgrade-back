@@ -33,6 +33,7 @@ router.get('/:id', (req, res) => {
   });
 
 router.post('/', (req, res) => {
+
     const locationInstance = new LocationSpace({
         location: req.body.location,
         coordinates: req.body.coordinates,

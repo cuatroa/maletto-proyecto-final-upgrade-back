@@ -1,15 +1,15 @@
-require('dotenv').config(); //Esto carga el contenido de .env
-const express = require('express');
-const cors = require('cors');
-const passport = require('passport');
+require("dotenv").config(); //Esto carga el contenido de .env
+const express = require("express");
+const cors = require("cors");
+const passport = require("passport");
 
-require('./passport'); // Requerimos nuestro archivo de configuración
+require("./passport"); // Requerimos nuestro archivo de configuración
 // Me conecto a mongoose importando directamente config/db.js
-require('./config/db');
+require("./config/db");
 
 // Sin poner /index es igual que al ponerlo
 // const apiRoutes = require('./routes')
-const apiRoutes = require('./routes/index.routes'); //es la puerta de entrada a la apli
+const apiRoutes = require("./routes/index.routes"); //es la puerta de entrada a la apli
 
 const server = express();
 
@@ -19,8 +19,8 @@ server.use(express.urlencoded({ extended: false }));
 // ⬇️ Este middleware se usa para parsear el body
 //No hace falta instalar el body-parser
 server.use(express.json());
-
-server.use(passport.initialize()); 
+server.use(passport.initialize());
+server.use(express.static("public"));
 
 server.use(apiRoutes); //Es de donde se redireccionan las rutas del proyect
 
