@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
  * También se puede poner picture para que se guarde en la carpeta uploads
  * */
 
-router.post('/', fileMiddleware.upload.single('picture'), (req, res) => {
+router.post('/', fileMiddleware.upload.single('img'), (req, res) => {
   
   console.log(req.file)
   const userInstance = new User({
@@ -57,6 +57,7 @@ router.post('/', fileMiddleware.upload.single('picture'), (req, res) => {
     telephone: req.body.telephone
     // img: "/uploads/" + req.file.filename
   });
+  //Con este bucle se solicita la img sin ser requerido
   if (req.file) {
     userInstance.img = "/uploads/" + req.file.filename
   }
