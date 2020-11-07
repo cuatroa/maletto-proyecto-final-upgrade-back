@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../models/User");
 const fileMiddleware = require("../middlewares/file.middleware");
 const passport = require("passport");
+const { uploadToCloudinary } = require("../middlewares/file.middleware");
 
 const router = express.Router(); //Se crean los caminos de rutas
 
@@ -43,9 +44,12 @@ router.get('/:id', (req, res) => {
  * También se puede poner picture para que se guarde en la carpeta uploads
  * */
 
-router.post('/', fileMiddleware.upload.single('img'), (req, res) => {
+router.post('/', [fileMiddleware.upload.single('img'), uploadToCloudinary], async (req, res) => {
   
   console.log(req.file)
+
+  const img = req.file_url || null;
+  
   const userInstance = new User({
     name: req.body.name,
     lastName: req.body.lastName,
@@ -54,12 +58,12 @@ router.post('/', fileMiddleware.upload.single('img'), (req, res) => {
     birthDate: req.body.birthDate,
     password: req.body.password,
     guardian: req.body.guardian, // o falso!
-    telephone: req.body.telephone
+    telephone: req.body.telephone,
     // img: "/uploads/" + req.file.filename
   });
   //Con este bucle se solicita la img sin ser requerido
-  if (req.file) {
-    userInstance.img = "/uploads/" + req.file.filename
+  if (img) {
+    userInstance.img = img
   }
   
   userInstance
