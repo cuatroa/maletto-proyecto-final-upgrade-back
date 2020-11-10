@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const mongoose = require('mongoose');
 
 // Creamos un esquema para proteger la información que guardamos
 const userSchema = new mongoose.Schema(
@@ -16,9 +15,9 @@ const userSchema = new mongoose.Schema(
     telephone: { type: Number },
     //Se crean arrays para almacenar varios Id de otros modelos -- hipervinculación models
     locationSpaces: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "LocationSpace" },
+      { type: mongoose.Schema.Types.ObjectId, ref: 'LocationSpace' },
     ],
-    bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: "Booking" }], //SOS Cristian
+    bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Booking' }], //SOS Cristian
   },
   {
     timestamps: true,
@@ -26,7 +25,7 @@ const userSchema = new mongoose.Schema(
 );
 
 // Creamos un modelo usando el esquema y lo exportamos
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 module.exports = User;
 
 // REVISAR INICIO DE SESIÓN CON REDES SOCIALES

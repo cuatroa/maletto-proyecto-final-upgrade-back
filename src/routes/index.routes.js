@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 //Entramos aquí cuando vamos a http://localhost:3001/user
 //.use = es para la utilidad de las rutas - para exportar datos
 router.use("/user", userRouter);
-router.use("/locationSpace", locationSpaceRouter);
+router.use("/location-space", locationSpaceRouter);
 router.use("/booking", bookingRouter);
 router.use("/review", reviewRouter);
 
