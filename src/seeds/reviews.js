@@ -5,8 +5,10 @@ const Review = require('../models/Review');
 
 const seedReviews = [
   {
-    value: 10,
-    comment: 'El hall es acogedor y super chulo, muy limpio, Rocio nos ayudó a subir las maletas y nos transmitió muchísima seguridad.',
+    "value" : 4.5,
+    "comment" : "Jacob responde rápido y estuvo muy atento. Nos dió muchos consejos sobre Madrid y pudimos hacer turismo tranquilamente. Su ubicación nos vino genial.",
+    "user": "5fabccb288fb296090024a84",
+    "locationSpace": "5fabcda688fb296090024a85"
   },
   {
     value: 9,

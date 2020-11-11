@@ -1,10 +1,14 @@
 const express = require("express");
 const Review = require("../models/Review");
+const User = require("../models/User");
+const LocationSpace = require("../models/LocationSpace");
 
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
     Review.find()
+      .populate(['user', 'locationSpace'])
+      .exec()
       .then((reviews) => {
           //sale respuesta ok
           res.status(200).json(reviews);
@@ -22,6 +26,8 @@ router.get('/', (req, res, next) => {
       const id = req.params.id;
     
       Review.findById(id)
+        .populate(['user', 'locationSpace'])
+        .exec()
         .then((review) => {
           res.status(200).json(review);
         })
@@ -30,18 +36,41 @@ router.get('/', (req, res, next) => {
         });
     });
   
-  router.post('/', (req, res) => {
-      const reviewInstance = new Review({
+  router.post('/', async (req, res) => {
+    const user = req.body.user;
+    const locationSpace = req.body.locationSpace;
+
+    if (!user || !locationSpace ) {
+      res.status(422).json('User and location fields are required');
+      return;
+    }
+
+      const payload = {
           value: req.body.value,
           comment: req.body.comment,
-          //TRAER USER Y LOCATION
+          user: user,
+          locationSpace: locationSpace,
+      };
 
+      const validChanges = {};
+
+      Object.keys(payload).forEach((changeKey) => {
+
+        if (payload[changeKey]) {
+          validChanges[changeKey] = payload[changeKey];
+        }
       });
+
+      const reviewInstance = new Review(validChanges);
   
       reviewInstance
       .save()
       .then(() => {
+        LocationSpace.findByIdAndUpdate(req.body.user, {
+          $push: { reviews: [reviewInstance._id] }
+        }).then(() => {
         res.status(201).send(reviewInstance);
+        });        
       })
       .catch((err) => {
         res.status(422).json(err.message);
@@ -89,3 +118,5 @@ router.get('/', (req, res, next) => {
     });
     
   module.exports = router;
+
+  //¿Cómo incluir ID de User si en User no necesitamos las reviews?S

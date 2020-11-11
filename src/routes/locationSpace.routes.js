@@ -1,6 +1,9 @@
 const express = require('express');
 const LocationSpace = require('../models/LocationSpace');
 const User = require('../models/User');
+const fileMiddleware = require('../middlewares/file.middleware');
+const { uploadToCloudinary } = require('../middlewares/file.middleware');
+
 
 const router = express.Router(); //Se crean los caminos de rutas
 
@@ -8,7 +11,8 @@ const router = express.Router(); //Se crean los caminos de rutas
 //req (lo que le usuario manda), res(objeto que tiene funciones y responde al enpoint-router), next(la function se comporta como un middleware-encadenando las rutas)
 router.get('/', (req, res, next) => {
   LocationSpace.find()
-    .populate('user')
+    .populate(['user', 'review'])
+    .exec()
     .then((locations) => {
       //sale respuesta ok
       res.status(200).json(locations);
@@ -26,7 +30,8 @@ router.get('/:id', (req, res) => {
   const id = req.params.id;
 
   LocationSpace.findById(id)
-    .populate('user')
+    .populate(['user', 'review'])
+    .exec()
     .then((location) => {
       res.status(200).json(location);
     })
@@ -35,23 +40,27 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post(
+  '/',
+  [fileMiddleware.upload.single('img'), uploadToCloudinary],
+  async (req, res) => {
   if (!req.body.user) {
     res.status(422).json('User field is required');
     return;
   }
 
+  const img = req.file_url || null;
+
   const payload = {
     location: req.body.location,
     coordinates: req.body.coordinates,
-    // img
     title: req.body.title,
     availability: req.body.availability,
     capacity: req.body.capacity,
     description: req.body.description,
     type: req.body.type,
-    // TRAER USER Y REVIEW de otros modelos
     user: req.body.user,
+    img: img
   };
 
   // Tenemos que limpiar los campos NO VÁLIDOS para poderlo guardar
@@ -80,20 +89,24 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', [fileMiddleware.upload.single('img'), uploadToCloudinary],
+async (req, res) => {
   const id = req.params.id; // 5f994b254025b0facece4fb4
+
+  const img = req.file_url || null;
 
   const changes = {
     location: req.body.location,
     coordinates: req.body.coordinates,
-    // img
     title: req.body.title,
     availability: req.body.availability,
     capacity: req.body.capacity,
     description: req.body.description,
     type: req.body.type,
-    // TRAER USER Y REVIEW de otros modelos
   };
+  if (img) {
+    changes.img = img
+  }
 
   // Tenemos que limpiar los campos NO VÁLIDOS para poderlo guardar
   const validChanges = {};

@@ -10,6 +10,8 @@ const router = express.Router(); //Se crean los caminos de rutas
 //req (lo que le usuario manda), res(objeto que tiene funciones y responde al enpoint-router), next(la function se comporta como un middleware-encadenando las rutas)
 router.get('/', (req, res, next) => {
   User.find()
+    .populate(['locationSpaces', 'bookings'])
+    .exec()
     .then((users) => {
       //sale respuesta ok
       res.status(200).json(users);
@@ -27,7 +29,7 @@ router.get('/:id', (req, res) => {
   const id = req.params.id;
 
   User.findById(id)
-    .populate('locationSpaces') //PELIGRO POR DUPLICIDAD DE DATOS? Función de JS que haga un Push de un nuevo ID(Location) en un User?
+    .populate(['locationSpaces', 'bookings'])
     .exec()
     .then((user) => {
       res.status(200).json(user);
@@ -81,8 +83,11 @@ router.post(
   }
 );
 
-router.put('/:id', (req, res) => {
+router.put('/:id', [fileMiddleware.upload.single('img'), uploadToCloudinary],
+async (req, res) => {
   const id = req.params.id; // 5f994b254025b0facece4fb4
+
+  const img = req.file_url || null;
 
   const changes = {
     name: req.body.name,
@@ -94,6 +99,9 @@ router.put('/:id', (req, res) => {
     guardian: req.body.guardian, // o falso!
     telephone: req.body.telephone,
   };
+  if (img) {
+    changes.img = img;
+  }
 
   // Tenemos que limpiar los campos NO VÁLIDOS para poderlo guardar
   const validChanges = {};

@@ -1,5 +1,6 @@
 const express = require('express');
 const Booking = require('../models/Booking');
+const User = require('../models/User');
 
 const router = express.Router(); //Se crean los caminos de rutas
 
@@ -49,7 +50,7 @@ router.post('/', (req, res) => {
     res.status(422).json('Faltan user, guardian o locationSpace');
   }
 
-  const bookingInstance = new Booking({
+  const payload = {
     arriveDate: req.body.arriveDate,
     departureDate: req.body.departureDate,
     price: req.body.price,
@@ -57,15 +58,27 @@ router.post('/', (req, res) => {
     user,
     guardian,
     locationSpace,
+  };
+
+  const validChanges = {};
+
+  Object.keys(payload).forEach((changeKey) => {
+
+    if (payload[changeKey]) {
+      validChanges[changeKey] = payload[changeKey];
+    }
   });
+  
+  const bookingInstance = new Booking(validChanges);
 
   bookingInstance
     .save()
     .then(() => {
-      // Para cada usuario, empujar el nuevo booking bookingInstance en el array de bookings
-      // User.findByIdAndUpdate(...)
-
+      User.findByIdAndUpdate(user, {
+        $push: { bookings: [bookingInstance._id] }
+      }).then(() => {
       res.status(201).send(bookingInstance);
+      });
     })
     .catch((err) => {
       res.status(422).json(err.message);
