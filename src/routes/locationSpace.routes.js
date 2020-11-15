@@ -35,15 +35,16 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
 
     const locationInstance = new LocationSpace({
-        location: req.body.location,
-        coordinates: req.body.coordinates,
-        // img
-        title: req.body.title,
-        availability: req.body.availability,
-        capacity: req.body.capacity,
-        description: req.body.description,
-        type: req.body.type
-        // TRAER USER Y REVIEW de otros modelos
+      location: req.body.location,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
+      // img
+      title: req.body.title,
+      availability: req.body.availability,
+      capacity: req.body.capacity,
+      description: req.body.description,
+      type: req.body.type,
+      // TRAER USER Y REVIEW de otros modelos
     });
 
     locationInstance
