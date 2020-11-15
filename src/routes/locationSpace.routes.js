@@ -98,7 +98,8 @@ async (req, res) => {
 
   const changes = {
     location: req.body.location,
-    coordinates: req.body.coordinates,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
     title: req.body.title,
     availability: req.body.availability,
     capacity: req.body.capacity,
