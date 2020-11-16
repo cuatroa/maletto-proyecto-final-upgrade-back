@@ -2,8 +2,9 @@ require("dotenv").config(); //Esto carga el contenido de .env
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
+const cookieSession = require('cookie-session');
 
-require("./passport"); // Requerimos nuestro archivo de configuración
+require("./config/passport"); // Requerimos nuestro archivo de configuración
 // Me conecto a mongoose importando directamente config/db.js
 require("./config/db");
 
@@ -14,12 +15,24 @@ const apiRoutes = require("./routes/index.routes"); //es la puerta de entrada a 
 const server = express();
 
 // Aceptamos peticiones desde cualquier servidor
-server.use(cors());
+server.use(
+  cors({
+    origin: true, // Easy cors origin validation for development purposes
+    credentials: true,
+  })
+);
 server.use(express.urlencoded({ extended: false }));
 // ⬇️ Este middleware se usa para parsear el body
 //No hace falta instalar el body-parser
 server.use(express.json());
+server.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000, // milliseconds of a day
+    keys: [process.env.COOKIE_KEY || 'express-auth-cookie']
+  })
+);
 server.use(passport.initialize());
+server.use(passport.session());
 server.use(express.static(__dirname + "/public"));
 
 server.use(apiRoutes); //Es de donde se redireccionan las rutas del proyect

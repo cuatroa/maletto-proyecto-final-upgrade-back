@@ -3,9 +3,10 @@ const mongoose = require("mongoose");
 const url = process.env.MONGO_ATLAS_URL // || 'mongodb://localhost:27017/maleteo-fs-20';
 
 const connectionParams = {
-  useNewUrlParser: true,
-  useCreateIndex: true,
   useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true
+  
 };
 mongoose
   .connect(url, connectionParams)

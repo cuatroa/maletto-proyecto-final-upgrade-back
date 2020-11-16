@@ -3,9 +3,12 @@ const LocationSpace = require('../models/LocationSpace');
 const User = require('../models/User');
 const fileMiddleware = require('../middlewares/file.middleware');
 const { uploadToCloudinary } = require('../middlewares/file.middleware');
+// const authMid = require('../middlewares/auth.middleware');
 
 
 const router = express.Router(); //Se crean los caminos de rutas
+
+// router.use(authMid);
 
 //hace alusión al userController -- Trae todos los Users --
 //req (lo que le usuario manda), res(objeto que tiene funciones y responde al enpoint-router), next(la function se comporta como un middleware-encadenando las rutas)
