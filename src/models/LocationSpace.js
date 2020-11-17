@@ -6,6 +6,7 @@ const locationSpaceSchema = new mongoose.Schema(
     location: { type: String, required: true },
     latitude: { type: String },
     londitude: { type: String },
+    city: { type: String },
     img: { type: String },
     title: { type: String, required: true },
     availability: { type: Date }, //Poner date -- vinculado con Ruta type Get
