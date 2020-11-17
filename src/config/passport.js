@@ -119,7 +119,7 @@ passport.serializeUser((user, done) => {
   done(null, user.id)
 })
 
-// Get the cookie from the request and convert it into the user
+// Get the cookie from the request and convert it into the user in req.user
 passport.deserializeUser((id, done) => {
   User.findById(id).then((user) => done(null, user))
 })
