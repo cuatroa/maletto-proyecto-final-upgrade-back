@@ -3,9 +3,12 @@ const Booking = require('../models/Booking');
 const User = require('../models/User');
 
 const router = express.Router(); //Se crean los caminos de rutas
+const { isAuthenticated } = require("../middlewares/auth.middleware");
 
 router.get('/', (req, res, next) => {
   Booking.find()
+  .populate(["user", "locationSpace"])
+  .exec()
     .then((bookings) => {
       //sale respuesta ok
       res.status(200).json(bookings);
@@ -23,7 +26,8 @@ router.get('/:id', (req, res) => {
   const id = req.params.id;
 
   Booking.findById(id)
-    .populate(['user', 'guardian', 'locationSpace'])
+    .populate(["user", "locationSpace"])
+    .exec()
     .then((booking) => {
       res.status(200).json(booking);
     })
@@ -41,23 +45,19 @@ router.get('/:id', (req, res) => {
 //   "guardian": "5faa7a0b9add2d1f992fcddd",
 //   "locationSpace": "5faa8115b8bb4853bea83dda"
 // }
-router.post('/', (req, res) => {
-  const user = req.body.user;
-  const guardian = req.body.guardian;
+router.post('/', [isAuthenticated], (req, res) => {
+  // const guardian = req.body.guardian;
   const locationSpace = req.body.locationSpace;
 
-  if (!user || !guardian || !locationSpace) {
-    res.status(422).json('Faltan user, guardian o locationSpace');
-  }
+
 
   const payload = {
     arriveDate: req.body.arriveDate,
     departureDate: req.body.departureDate,
     price: req.body.price,
-    //TRAER USER Y LOCATION
-    user,
-    guardian,
-    locationSpace,
+    user: req.user._id,
+    // guardian,
+    locationSpace: req.body.locationSpace,
   };
 
   const validChanges = {};
@@ -74,7 +74,7 @@ router.post('/', (req, res) => {
   bookingInstance
     .save()
     .then(() => {
-      User.findByIdAndUpdate(user, {
+      User.findByIdAndUpdate(req.user._id, {
         $push: { bookings: [bookingInstance._id] }
       }).then(() => {
       res.status(201).send(bookingInstance);
