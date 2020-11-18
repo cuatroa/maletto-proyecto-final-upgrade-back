@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true }, //Poner @ como requerido -- input type email--
     birthDate: { type: Date }, //generar un desplegable -- input date --
     password: { type: String, required: true }, //Token -- Video Dalio --
-    guardian: { type: Boolean }, //Boolean es para si o no -- en caso de + options string con value(basic/admin..)
+    guardian: { type: Boolean, default: false }, //Boolean es para si o no -- en caso de + options string con value(basic/admin..)
     telephone: { type: Number },
     googleId: { type: String },
     //Se crean arrays para almacenar varios Id de otros modelos -- hipervinculación models

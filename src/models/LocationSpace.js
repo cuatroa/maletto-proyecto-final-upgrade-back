@@ -6,7 +6,6 @@ const locationSpaceSchema = new mongoose.Schema(
     location: { type: String, required: true },
     latitude: { type: String },
     longitude: { type: String },
-    
     city: { type: String },
     img: { type: String },
     title: { type: String, required: true },
