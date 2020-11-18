@@ -13,7 +13,7 @@ const locationSpaceSchema = new mongoose.Schema(
     capacity: { type: Number },
     description: { type: String }, //Token -- Video Dalio --
     type: { type: String }, //desplegable -- desde front se accede a la info de servidor
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    user: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reviews" }],
   },
   {
