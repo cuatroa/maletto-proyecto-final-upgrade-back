@@ -139,16 +139,16 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-router.put('guardian/:id', [isAuthenticated], async (req, res) => {
+// router.put('guardian/:id', [isAuthenticated], async (req, res) => {
 
-  const user = await User.findByIdAndUpdate(req.body.id,
-    { 
-      guardian : req.body.guardian
-    },
-    {
-      new: true
-    });
-    res.json({ user });
-});
+//   const user = await User.findByIdAndUpdate(req.body.id,
+//     { 
+//       guardian : req.body.guardian
+//     },
+//     {
+//       new: true
+//     });
+//     res.json({ user });
+// });
 
 module.exports = router;
