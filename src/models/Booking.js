@@ -8,7 +8,7 @@ const bookingSchema = new mongoose.Schema(
     price: { type: Number },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     guardian: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    Aquí no se genera array --solo afecta a un user
+    // Aquí no se genera array --solo afecta a un user
     locationSpace:{ type: mongoose.Schema.Types.ObjectId, ref: "LocationSpace" },
   },
   {
