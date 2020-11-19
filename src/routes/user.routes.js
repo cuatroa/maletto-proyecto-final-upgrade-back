@@ -11,7 +11,7 @@ const router = express.Router(); //Se crean los caminos de rutas
 //req (lo que le usuario manda), res(objeto que tiene funciones y responde al enpoint-router), next(la function se comporta como un middleware-encadenando las rutas)
 router.get('/', (req, res, next) => {
   User.find()
-    .populate(['locationSpaces', 'bookings'])
+    .populate(['locationSpaces', {path : 'bookings', model: 'Booking', populate: { path: 'locationSpace', model: 'LocationSpace' }}])
     .exec()
     .then((users) => {
       //sale respuesta ok
@@ -91,7 +91,7 @@ router.put(
     const id = req.params.id; // 5f994b254025b0facece4fb4
 
     const img = req.file_url || null;
-
+    console.log(img);
     const changes = {
       name: req.body.name,
       lastName: req.body.lastName,
