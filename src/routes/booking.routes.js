@@ -54,7 +54,7 @@ router.post('/', [isAuthenticated], (req, res) => {
   const payload = {
     arriveDate: req.body.arriveDate,
     departureDate: req.body.departureDate,
-    price: req.body.price,
+    amount: req.body.amount,
     user: req.user._id,
     // guardian,
     locationSpace: req.body.locationSpace,
@@ -91,7 +91,7 @@ router.put('/:id', (req, res) => {
   const changes = {
     arriveDate: req.body.arriveDate,
     departureDate: req.body.departureDate,
-    price: req.body.price,
+    amount: req.body.amount,
     //TRAER USER Y LOCATION
   };
 
