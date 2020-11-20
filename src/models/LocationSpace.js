@@ -14,7 +14,7 @@ const locationSpaceSchema = new mongoose.Schema(
     description: { type: String }, //Token -- Video Dalio --
     type: { type: String }, //desplegable -- desde front se accede a la info de servidor
     user: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Reviews" }],
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
   },
   {
     timestamps: true, //marca del tiempo de ejecución -- Cristian :) --SOS

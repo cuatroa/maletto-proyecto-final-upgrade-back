@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
   };
 
   LocationSpace.find(searchOptions)
-    .populate(['user', 'review'])
+    .populate(['user', 'reviews'])
     .exec()
     .then((locations) => {
       //sale respuesta ok
@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
   const id = req.params.id;
 
   LocationSpace.findById(id)
-    .populate(['user', 'review'])
+    .populate(['user', 'reviews'])
     .exec()
     .then((location) => {
       res.status(200).json(location);
