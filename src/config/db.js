@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const url =
-  process.env.MONGO_ATLAS_URL || 'mongodb://localhost:27017/maleteo-fs-20';
+const url = process.env.MONGO_ATLAS_URL; //|| 'mongodb://localhost:27017/maleteo-fs-20';
 
 const connectionParams = {
   useUnifiedTopology: true,
@@ -11,7 +10,7 @@ const connectionParams = {
 mongoose
   .connect(url, connectionParams)
   .then(() => {
-    console.log('Connected to database ');
+    console.log("Connected to database ");
   })
   .catch((err) => {
     console.error(`Error connecting to the database. \n${err}`);
