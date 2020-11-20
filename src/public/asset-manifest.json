@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/static/css/main.441e4233.chunk.css",
+    "main.js": "/static/js/main.f2da26a9.chunk.js",
+    "main.js.map": "/static/js/main.f2da26a9.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.5a6d0b97.js",
+    "runtime-main.js.map": "/static/js/runtime-main.5a6d0b97.js.map",
+    "static/css/2.47988dbe.chunk.css": "/static/css/2.47988dbe.chunk.css",
+    "static/js/2.ff814fda.chunk.js": "/static/js/2.ff814fda.chunk.js",
+    "static/js/2.ff814fda.chunk.js.map": "/static/js/2.ff814fda.chunk.js.map",
+    "static/js/3.3c432b4d.chunk.js": "/static/js/3.3c432b4d.chunk.js",
+    "static/js/3.3c432b4d.chunk.js.map": "/static/js/3.3c432b4d.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.47988dbe.chunk.css.map": "/static/css/2.47988dbe.chunk.css.map",
+    "static/css/main.441e4233.chunk.css.map": "/static/css/main.441e4233.chunk.css.map",
+    "static/js/2.ff814fda.chunk.js.LICENSE.txt": "/static/js/2.ff814fda.chunk.js.LICENSE.txt",
+    "static/media/Amsterdam.3ee079ff.jpg": "/static/media/Amsterdam.3ee079ff.jpg",
+    "static/media/Athens1.6367f210.jpg": "/static/media/Athens1.6367f210.jpg",
+    "static/media/Aveiro.1f1e54f1.jpg": "/static/media/Aveiro.1f1e54f1.jpg",
+    "static/media/Barcelona.73e0a7e4.jpg": "/static/media/Barcelona.73e0a7e4.jpg",
+    "static/media/Cairo.17a120bf.jpg": "/static/media/Cairo.17a120bf.jpg",
+    "static/media/Paris.1ab1b495.jpg": "/static/media/Paris.1ab1b495.jpg",
+    "static/media/a.06919512.jpg": "/static/media/a.06919512.jpg",
+    "static/media/b.cf9e5654.jpg": "/static/media/b.cf9e5654.jpg",
+    "static/media/c.44ab91c2.jpg": "/static/media/c.44ab91c2.jpg",
+    "static/media/cadena@3x.8a136e9d.png": "/static/media/cadena@3x.8a136e9d.png",
+    "static/media/e.4734a794.jpg": "/static/media/e.4734a794.jpg",
+    "static/media/f.bfb53cdd.jpg": "/static/media/f.bfb53cdd.jpg",
+    "static/media/fenix@3x.1f875035.png": "/static/media/fenix@3x.1f875035.png",
+    "static/media/index.scss": "/static/media/maletto_icons.fadde4b7.ttf",
+    "static/media/ChatPage.scss": "/static/media/robot.151bf9f0.jpg",
+    "static/media/world@3x.c03cef7a.png": "/static/media/world@3x.c03cef7a.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5a6d0b97.js",
+    "static/css/2.47988dbe.chunk.css",
+    "static/js/2.ff814fda.chunk.js",
+    "static/css/main.441e4233.chunk.css",
+    "static/js/main.f2da26a9.chunk.js"
+  ]
+}
